@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "Integrated Winston",
+  "description": "This is winston.",
+  "version": "0.991",
+  "options_page": "winston_cfg.html",
+
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:*/*","http://0.0.0.0:*/*","http://127.0.0.1:*/*","http://*.dev/*","http://*/*"],
+      "css": ["UI/html_templates/style/winston.css"],
+      "js": ["jquery.js","injections/winject.js"]
+    }
+  ],
+
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "icons": {"128": "icon128.png" },
+
+  "browser_action": {
+    "default_icon": "favicon.ico"
+  },
+  "background": { "page": "winston.html" },
+  "icons": {"128": "icon128.png" }
+}
