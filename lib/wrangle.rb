@@ -16,9 +16,9 @@ end
 # Embed templates into main html
 bin_laden = "../bin";
 hub_file = if(engine == "preview")
-  File.open("#{bin_laden}/winston.html", "w+");
-else
   File.open("templates/winston.html", "w+");
+else
+  File.open("#{bin_laden}/winston.html", "w+");
 end
 
 puts "Packing Extension default data"
@@ -34,6 +34,8 @@ else
   FileUtils.cp("javascripts/winston_host.js","../bin/winston_host.js")
   FileUtils.cp("javascripts/winston_option.js", "../bin/winston_option.js")
 end
+FileUtils.cp("javascripts/jquery.js","../bin/jquery.js")
+
 
 dirpath = "templates/js_data"
 puts Dir.entries(dirpath)
@@ -45,7 +47,7 @@ Dir.entries(dirpath).each do |file|
 end
 
 puts "Packing Main base driver"
-hub_file.write("<script src='winston.js'></script>");
+hub_file.write("<script src='winston_host.js'></script>");
 
 puts "transferring Style"
 FileUtils.cp("templates/html_templates/style/winston.css","../bin/winston.css")
