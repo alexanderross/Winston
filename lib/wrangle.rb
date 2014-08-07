@@ -15,6 +15,10 @@ end
 
 # Embed templates into main html
 bin_laden = "../bin";
+
+puts "Wrangling."
+
+
 hub_file = if(engine == "preview")
   File.open("templates/winston.html", "w+");
 else

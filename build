@@ -1,18 +1,23 @@
 ENV=$1
 
+echo "Wiping current stuff"
+cd bin
+rm -rf *
+cd ../install
+rm -rf *
+cd ../keys
+rm -rf *
+cd ../
+
 echo "Wrangling - building a bin"
 cd lib
 ruby wrangle.rb $ENV
 cd ../
 
 echo "Building keys"
-cd keys
-./build_keys.sh wayne
-cd ../
+./build_keys.sh winston
 
-echo "Clearing current builds"
-rm -rf install
-mkdir install
+cp -R lib/images/. bin/
 
 cd lib
 cd builds
@@ -26,7 +31,7 @@ cp $SRC $DEST
 echo "Creating install for $ENV"
 
 ./../../crxbuild.sh ../../bin ../../keys/winston.pem "../../install/winston.crx"
-cp ../../keys/wayne.pem "../../install/winston.pem"
+cp ../../keys/winston.pem "../../install/winston.pem"
 
 
 echo "Chances are your console doesn't have a consistent chrome link. I can't load it into chrome automatically. sorry bro."

@@ -11,4 +11,6 @@ function generate_ssl_cert {
   )
 }
 
+cd keys
 generate_ssl_cert $1
+cd ..
