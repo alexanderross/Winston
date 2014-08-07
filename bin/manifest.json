@@ -8,8 +8,8 @@
   "content_scripts": [
     {
       "matches": ["http://localhost:*/*","http://0.0.0.0:*/*","http://127.0.0.1:*/*","http://*.dev/*","http://*/*"],
-      "css": ["winston.css"],
-      "js": ["jquery.js","winject.js"]
+      "css": ["UI/html_templates/style/winston.css"],
+      "js": ["jquery.js","injections/winject.js"]
     }
   ],
 
