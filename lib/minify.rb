@@ -26,7 +26,7 @@ def minify_js(read_file, final_destination)
   when Net::HTTPSuccess, Net::HTTPRedirection
     body = res.body.split("id=\"js_out\" rows=\"40\" cols=\"80\">")[1]
     body = body.split("</textarea></p>")[0]
-    File.open(final_destination+".min", 'w') {|f| f.write(body.gsub("&quot;","\"").gsub("&gt;",">").gsub("&lt;","<")) }
+    File.open(final_destination, 'w') {|f| f.write(body.gsub("&quot;","\"").gsub("&gt;",">").gsub("&lt;","<")) }
   else
     puts "Something went horridly wrong. Here's what I got back... Sorry..."
     puts res.value

@@ -7,9 +7,9 @@
 
   "content_scripts": [
     {
-      "matches": ["http://localhost:*/*","http://0.0.0.0:*/*","http://127.0.0.1:*/*","http://*.dev/*","http://*/*"],
+      "matches": ["http://localhost:*/*","http://0.0.0.0:*/*","http://127.0.0.1:*/*","http://*.dev/*"],
       "css": ["winston.css"],
-      "js": ["jquery.js.min","winject.js.min"]
+      "js": ["jquery.js","winject.js"]
     }
   ],
 
