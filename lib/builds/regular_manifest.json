@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Integrated Winston",
-  "description": "This is winston.",
+  "description": "This is winston. Regular Copy",
   "version": "0.991",
   "options_page": "winston_cfg.html",
 
@@ -9,7 +9,7 @@
     {
       "matches": ["http://localhost:*/*","http://0.0.0.0:*/*","http://127.0.0.1:*/*","http://*.dev/*","http://*/*"],
       "css": ["winston.css"],
-      "js": ["jquery.js","winject.js"]
+      "js": ["jquery.js.min","winject.js.min"]
     }
   ],
 

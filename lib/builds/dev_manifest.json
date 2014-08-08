@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Integrated Winston",
-  "description": "This is winston.",
+  "description": "This is winston. Dev Copy",
   "version": "0.991",
   "options_page": "winston_cfg.html",
 

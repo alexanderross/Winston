@@ -1,6 +1,9 @@
 ENV=$1
 
 echo "Wiping current stuff"
+mkdir bin
+mkdir install
+mkdir keys
 cd bin
 rm -rf *
 cd ../install
