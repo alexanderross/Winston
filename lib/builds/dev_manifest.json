@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Integrated Winston",
   "description": "This is winston. Dev Copy",
-  "version": "0.5.71",
+  "version": "0.5.78",
   "options_page": "winston_cfg.html",
 
   "content_scripts": [
