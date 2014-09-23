@@ -42,7 +42,12 @@ cp ../../keys/winston.pem "../../install/winston.pem"
 
 echo "Chances are your console doesn't have a consistent chrome link. I can't load it into chrome automatically. sorry bro."
 cd ../../
-$newver=$(cat lib/version.txt)
-git add .
-git commit -am "$2 update to $newver"
+if [[ -n "$2" ]]
+then
+	echo "tagging and committing"
+	newver=$(cat lib/version.txt | tr -d ' ')
+	git add .
+	git commit -am "$2"
+	git tag -a v$newver -m "version $newver"
+fi
 
