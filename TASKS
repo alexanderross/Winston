@@ -25,7 +25,7 @@ NEWish SHIT ----
 	- Option to 'silence' an expander - Essentially for a parent expander, be able to consider it's parent(s), but not include itself in the final result. Silencing removes it's role in both presentation count and final selector composition.
 	- Option to collapse a parent expander. Already in code somewhere, just needs UI stuff.
 	-<0.5.46> 'Ignore next event' option.
-	-<0.5.47> Build autocommits.
+	<0.5.47> Build autocommits.
 
 SHITTY STYLES ----
 ( > 0.5.32)
