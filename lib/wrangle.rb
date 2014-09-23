@@ -11,12 +11,38 @@ if(!%w(regular dev expanded preview).include?(engine))
 end
 
 
+def replace_in_file(file, pattern, replacement)
+  updated_file = File.read(file).gsub(pattern, replacement)
+  File.open(file,"w"){|f| f.write updated_file} 
+end
+
 # not now...
 
 # Embed templates into main html
 bin_laden = "../bin";
 
-puts "Wrangling."
+puts "Wrangling. First we version stuff"
+old_ver = ""
+new_ver = ""
+
+File.open("version.txt", "r+") do |file|
+  begin
+    old_ver=file.read.strip()
+    maj_version, min_version, rev = old_ver.split(".").map(&:to_i)
+  rescue
+    puts "Version number contains some bad shit. it should be [0-9]+.[0-9]+"
+  end
+
+  puts "Build marks revision change from #{rev} to #{rev+1}"
+  new_ver="#{maj_version}.#{min_version}.#{rev+1}"
+  file.rewind
+  file.write(new_ver+(" "*10))
+end
+replace_in_file("builds/#{engine}_manifest.json", /\"version\"\:\s\"([0-9\.]+)\"/, "\"version\": \"#{new_ver}\"")
+replace_in_file("javascripts/winston_host.js", /\[\"winston\_version\_number\"\]\=\"[0-9\.]+\"\;/, "[\"winston_version_number\"]=\"#{new_ver}\";")
+
+
+
 
 
 hub_file = if(engine == "preview")

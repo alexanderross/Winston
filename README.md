@@ -11,10 +11,14 @@ _it's a tool. For testing_
 As it stands, Winston has two different installation options. From the base directory you run 
    
 `./build <env>`  
+  
+Essentially, what this script does is collects the important files from lib, "compiles" them, and moves everything into bin.
 
 -Regular: Only runs on local URL's. This is useful in that the injection script doesn't go into every other damn page in chrome.
 
 -Expanded: The script is injected, and the tool is available in any webpage on chrome. This is useful while testing Winston's questionable robustness.
+
+-Dev: Meant to be loaded as an unpacked extension from the bin directory.
 
 Each of this is generated from a specific manifest file under lib/. To create your own type of installation, simply make your own manifest in lib with a unique name, and run ./build.sh. An installation directory named after your manifest will be created in /install, and the .crx will reflect your own speciall install .crx. Look at you....
 

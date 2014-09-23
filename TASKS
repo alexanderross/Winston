@@ -1,0 +1,33 @@
+NEW SETTINGS --- 
+( > 0.5.32)
+	- Lock recording to the tab it was initiated on. [4]
+	- Select fill colors for current/matched element BG colors. [7]
+	- Customized whitelisted attributes on a per-element-type basis. [6]
+
+ISSUES ----
+( > 0.5.32)
+	- Input select behavior. Attempts to resolve the click before input is accepted.
+	- Issues with templates not being returned and instantiated on slow page load. Throws error.
+	- Injection footprint may be too heavy. (prod build behavior may resolve this)
+	- Event listeners can easily be beat by other more agressive listeners on the page that will load before the injection. We must find a way to get our listener at the front of the line, even if we load last.
+	- Parent expanders will trigger matching fills on the elements they match. Visual matching should only happen at the base expander.
+
+MEDIOCRE STUFF ----
+( > 0.5.32)
+	- Event re-trigger mechinism isn't really comprehensive. The path nodelist isn't rebuild because there's no way to create a nodelist... 
+	- Index button should be available for each expander. Should be more obvious on/off
+
+
+NEWish SHIT ----
+( > 0.5.32)
+	- Re enable the undo and back buttons. May require event serialization between injection and host. 
+	- Define the exporters in JS files. The directories are set up for this. A good approach may be to create them as JS objects with similar structure, prepend them into the host js at build time, and select the one to be used from the options hash. Build would also be responsible to creating a global var pointing to an array of available exporters (files in export/).
+	- Option to 'silence' an expander - Essentially for a parent expander, be able to consider it's parent(s), but not include itself in the final result. Silencing removes it's role in both presentation count and final selector composition.
+	- Option to collapse a parent expander. Already in code somewhere, just needs UI stuff.
+	- 'Ignore next event' option.
+
+SHITTY STYLES ----
+( > 0.5.32)
+	- Styles absolutely suck. Routinely get clobbered by the host page.
+	- Static height for parent expander.
+	- Unused area to the left of tag name.

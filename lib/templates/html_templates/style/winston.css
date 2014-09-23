@@ -1,9 +1,25 @@
 #winston_box{
 	width: 500px;
 	position:fixed;
+	font-size: 13px;
+	z-index: 13379;
+}
+
+#winston_box.wn_top_right {
+	top:0px;
+	right:0px;
+}
+#winston_box.wn_top_lft {
+	top:0px;
+	left:0px;
+}
+#winston_box.wn_bot_right {
 	bottom:0px;
 	right:0px;
-	font-size: 13px;
+}
+#winston_box.wn_bot_left {
+	bottom:0px;
+	left:0px;
 }
 
 #winston_primary_disp{
