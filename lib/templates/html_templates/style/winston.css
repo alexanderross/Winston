@@ -69,7 +69,6 @@
 }
 
 .winston_expander_toggle_eq{
-	height:20px;
 	border:1px solid #000;
 	background-color: #3f3;
 	color:#fff;
@@ -116,6 +115,23 @@
 
 .winston_expander{
 	background-color: #DDD;
+}
+
+.winston_expander.silenced{
+	background-color: #CCC;
+	opacity: 0.5;
+}
+
+.winston_expander.silenced .winston_expander_count{
+	display: none;
+}
+
+.winston_expander_option{
+	width: 30px;
+	position: relative;
+	right: 0px;
+	top: 0px;
+	height:20px;
 }
 
 .winston_expander_criteria{

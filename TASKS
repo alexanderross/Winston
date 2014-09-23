@@ -22,7 +22,7 @@ NEWish SHIT ----
 ( > 0.5.32)
 	- Re enable the undo and back buttons. May require event serialization between injection and host. 
 	- Define the exporters in JS files. The directories are set up for this. A good approach may be to create them as JS objects with similar structure, prepend them into the host js at build time, and select the one to be used from the options hash. Build would also be responsible to creating a global var pointing to an array of available exporters (files in export/).
-	- Option to 'silence' an expander - Essentially for a parent expander, be able to consider it's parent(s), but not include itself in the final result. Silencing removes it's role in both presentation count and final selector composition.
+	-<0.5.65> Option to 'silence' an expander - Essentially for a parent expander, be able to consider it's parent(s), but not include itself in the final result. Silencing removes it's role in both presentation count and final selector composition.
 	- Option to collapse a parent expander. Already in code somewhere, just needs UI stuff.
 	-<0.5.46> 'Ignore next event' option.
 	<0.5.47> Build autocommits.
