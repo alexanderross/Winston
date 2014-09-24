@@ -10,6 +10,7 @@ ISSUES ----
 	- Issues with templates not being returned and instantiated on slow page load. Throws error.
 	- Injection footprint may be too heavy. (prod build behavior may resolve this)
 	- Event listeners can easily be beat by other more agressive listeners on the page that will load before the injection. We must find a way to get our listener at the front of the line, even if we load last.
+	-xpath compilation of classes is wrong.
 
 MEDIOCRE STUFF ----
 ( > 0.5.85)
