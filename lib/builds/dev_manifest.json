@@ -2,12 +2,12 @@
   "manifest_version": 2,
   "name": "Integrated Winston",
   "description": "This is winston. Dev Copy",
-  "version": "0.5.107",
+  "version": "0.5.109",
   "options_page": "winston_cfg.html",
 
   "content_scripts": [
     {
-      "matches": ["http://localhost:*/*","http://0.0.0.0:*/*","http://127.0.0.1:*/*","http://*.dev/*","http://*/*"],
+      "matches": ["http://localhost:*/*","http://0.0.0.0:*/*","http://127.0.0.1:*/*","http://*.dev/*","http://*/*",,"https://*/*"],
       "css": ["winston.css"],
       "js": ["jquery.js","winject.js"]
     }
