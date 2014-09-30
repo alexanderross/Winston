@@ -7,20 +7,19 @@ NEW SETTINGS ---
 ISSUES ----
 ( > 0.5.85)
 	- Input select behavior. Attempts to resolve the click before input is accepted.
-	- Issues with templates not being returned and instantiated on slow page load. Throws error.
 	- Injection footprint may be too heavy. (prod build behavior may resolve this)
 	- Event listeners can easily be beat by other more agressive listeners on the page that will load before the injection. We must find a way to get our listener at the front of the line, even if we load last.
-	-xpath compilation of classes is wrong.
 
 MEDIOCRE STUFF ----
 ( > 0.5.85)
-	- Event re-trigger mechinism isn't really comprehensive. The path nodelist isn't rebuild because there's no way to create a nodelist... 
+	- Event re-trigger mechinism isn't really comprehensive. The path nodelist isn't rebuilt because there's no way to create a nodelist... 
 
 
 NEWish SHIT ----
 ( > 0.5.85)
 	- Re enable the undo and back buttons. May require event serialization between injection and host. 
 	- Define the exporters in JS files. The directories are set up for this. A good approach may be to create them as JS objects with similar structure, prepend them into the host js at build time, and select the one to be used from the options hash. Build would also be responsible to creating a global var pointing to an array of available exporters (files in export/).
+	- Handle 'false' condition of reject input clicks. This enables a unique state where input is entered, then after confirming the input, it opens expanders to resolve the selector. 
 
 SHITTY STYLES ----
 ( > 0.5.85)
@@ -35,3 +34,6 @@ DONE... BITCHES.. ----
 	<0.5.85> Option to 'silence' an expander - Essentially for a parent expander, be able to consider it's parent(s), but not include itself in the final result. Silencing removes it's role in both presentation count and final selector composition.
 	<0.5.47> Build autocommits.
 	<0.5.85> Option to collapse a parent expander. Already in code somewhere, just needs UI stuff.
+	<0.6.2> Issues with templates not being returned and instantiated on slow page load. Throws error.
+	<0.6.2> xpath compilation of classes is wrong.
+
