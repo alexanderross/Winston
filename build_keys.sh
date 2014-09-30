@@ -1,7 +1,6 @@
 #!/bin/bash
  
 function generate_ssl_cert {
-  echo "ONESEVENTYFOUR -- RMAG -- KEYGEN PACK rev. 1 NO RSA KEYFOB"
   PASSWD=spacebanana
   cert_name=$1
  

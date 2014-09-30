@@ -31,10 +31,9 @@ With chrome's extension page open, drag the .crx file into it. Say yes to the pe
 
 ### Using
 
-So after you've installed, there's this smug fucking raccoon in your extensions bar. When you're at a place where your integration test should start, click him. 
+So after you've installed, there's this smug fucking squirrel in your extensions bar. If you're using an unpacked dir (dev), it's just a puzzle piece. When you're at a place where your integration test should start, click that shit. 
 
-At this point, the bar shows up wherever the options depict it (default bottom right)
-Time doesn't grow on trees - It grows in them. I'll write the rest of this out when I have time.
+At this point, the bar shows up wherever the options depict it (default bottom right).
 
 
 
