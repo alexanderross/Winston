@@ -1,0 +1,7 @@
+#host_pack is the files loaded into winston.html. This JS is included on the extension's .html page. 
+#This depicts which js files are loaded, and the sequence that they are loaded in.
+#winston_host.js will always load last. To change this would be silly.
+
+pref_storage.js
+css_to_xpath_converter.js
+winston_host.js

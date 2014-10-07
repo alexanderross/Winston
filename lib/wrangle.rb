@@ -2,8 +2,10 @@ require '../lib/minify.rb'
 require 'fileutils'
 
 engine = ARGV[0]
-engine ||= "regular";
+engine ||= "regular"
 # Compress JS
+
+bin_laden = "../bin"
 
 if(!%w(regular dev expanded preview).include?(engine))
   puts "Unknown environment. too bad."
@@ -16,10 +18,83 @@ def replace_in_file(file, pattern, replacement)
   File.open(file,"w"){|f| f.write updated_file} 
 end
 
+def copy_to_bin(files)
+  files.each do |f|
+    FileUtils.cp(f, "../bin/"+f.split("/").last)
+  end
+end
+
+#Take in a manifest, spit out file names in order to be loaded
+def files_for_manifested_dir(dir)
+  files = []
+  begin
+    manfile = File.open(File.join(dir,"import_manifest"), "r")
+  rescue
+    raise Exception.new("import manifest not found for #{dir}")
+  end
+
+  manfile.each_line do |l|
+    line = l.strip()
+    next if line[0] == "#"
+    next if line == ""
+
+    files << line
+  end
+
+  files
+end
+
+def process_host_pack
+  bin_laden = "../bin"
+  pack_path = "templates/js/host_pack"
+  files = files_for_manifested_dir(pack_path)
+  dirpath = "templates/html_templates/export"
+  host_file = File.open("#{bin_laden}/winston.html", "w+")
+
+  files.each do |f|
+    host_file.write("\n<script type='text/javascript'>\n")
+    host_file.write(File.open(File.join([pack_path,f])).read())
+    host_file.write("\n</script>\n")
+  end
+
+  Dir.entries(dirpath).each do |file|
+    next if file[0] == "."
+    host_file.write("\n<div id='template_#{file}'>\n")
+    host_file.write(File.open(File.join([dirpath,file,"winston.html"])).read())
+    host_file.write("\n</div>\n")
+  end
+  host_file.close
+
+end
+
+def process_inject_pack(engine)
+  files = files_for_manifested_dir("templates/js/injection_pack")
+  copy_to_bin(files.map{|fn| "templates/js/injection_pack/#{fn}"})
+
+  replace_in_file("builds/#{engine}_manifest.json", /\"js\":\s+\[.+\]/, "\"js\": [\"#{files.join("\",\"")}\"]")
+end
+
+def process_options_pack
+  bin_laden = "../bin"
+  pack_path = "templates/js/options_pack"
+  files = files_for_manifested_dir(pack_path)
+  opt_path = "#{bin_laden}/winston_cfg.html"
+
+  opt_content = File.open(opt_path, "r").read
+  opt_file = File.open(opt_path, "w+")
+  files.each do |f|
+    opt_file.write("\n<script type='text/javascript'>\n")
+    opt_file.write(File.open(File.join([pack_path,f])).read())
+    opt_file.write("\n</script>\n")
+  end
+  opt_file.write(opt_content)
+  opt_file.close
+
+end
+
 # not now...
 
 # Embed templates into main html
-bin_laden = "../bin";
 
 puts "Wrangling. First we version stuff"
 old_ver = ""
@@ -39,57 +114,19 @@ File.open("version.txt", "r+") do |file|
   file.write(new_ver+(" "*10))
 end
 replace_in_file("builds/#{engine}_manifest.json", /\"version\"\:\s\"([0-9\.]+)\"/, "\"version\": \"#{new_ver}\"")
-replace_in_file("javascripts/winston_host.js", /\[\"winston\_version\_number\"\]\=\"[0-9\.]+\"\;/, "[\"winston_version_number\"]=\"#{new_ver}\";")
+replace_in_file("templates/js/host_pack/winston_host.js", /\[\"winston\_version\_number\"\]\=\"[0-9\.]+\"\;/, "[\"winston_version_number\"]=\"#{new_ver}\";")
+
+process_host_pack
+process_options_pack
+process_inject_pack(engine)
 
 
 
+# Injection pack -> modify manifest to reflect contents. Shove into bin. Can minify
 
-
-hub_file = if(engine == "preview")
-  File.open("templates/winston.html", "w+");
-else
-  File.open("#{bin_laden}/winston.html", "w+");
-end
-
-puts "Packing Extension default data"
-
-if(engine == "expanded" || engine == "regular")
-  puts "Minifying JS footprints, you need an internet connection for this."
-  minify_js("javascripts/winject.js","../bin/winject.js")
-  minify_js("javascripts/winston_host.js","../bin/winston_host.js")
-  minify_js("javascripts/winston_option.js", "../bin/winston_option.js")
-else
-  puts "Copying JS into bin"
-  FileUtils.cp("javascripts/winject.js","../bin/winject.js")
-  FileUtils.cp("javascripts/winston_host.js","../bin/winston_host.js")
-  FileUtils.cp("javascripts/winston_option.js", "../bin/winston_option.js")
-end
-FileUtils.cp("javascripts/jquery.js","../bin/jquery.js")
-
-
-dirpath = "templates/js_data"
-puts Dir.entries(dirpath)
-Dir.entries(dirpath).each do |file|
-  next if file[0] == "."
-  hub_file.write("<script type='text/javascript'>")
-  hub_file.write(File.open(File.join([dirpath,file])).read())
-  hub_file.write("</script>\n")
-end
-
-puts "Packing Main base driver"
-hub_file.write("<script src='winston_host.js'></script>");
 
 puts "transferring Style"
 FileUtils.cp("templates/html_templates/style/winston.css","../bin/winston.css")
 
-
-
-dirpath = "templates/html_templates/export"
-Dir.entries(dirpath).each do |file|
-  next if file[0] == "."
-  hub_file.write("<div id='template_#{file}'>")
-  hub_file.write(File.open(File.join([dirpath,file,"winston.html"])).read())
-  hub_file.write("</div>\n")
-end
 
 puts "Done packing"

@@ -1,0 +1,5 @@
+#options_pack is the js loaded onto the extension's options page.
+#This depicts which js files are loaded, and the sequence that they are loaded in.
+
+jquery.js
+winston_option.js

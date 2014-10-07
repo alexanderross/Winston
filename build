@@ -12,13 +12,13 @@ cd ../keys
 rm -rf *
 cd ../
 
+echo "Copying CFG HTML"
+cp lib/templates/html_templates/cfg/winston_cfg.html bin/winston_cfg.html
+
 echo "Wrangling - building a bin"
 cd lib
 ruby wrangle.rb $ENV
 cd ../
-
-echo "Copying CFG HTML"
-cp lib/templates/html_templates/cfg/winston_cfg.html bin/winston_cfg.html
 
 echo "Building keys"
 ./build_keys.sh winston

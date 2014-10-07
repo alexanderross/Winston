@@ -1,0 +1,6 @@
+#injection_pack is the js loaded onto each matching webpage. All files in this dir must be accounted for in the manifest. 
+#This depicts which js files are loaded, and the sequence that they are loaded in.
+
+jquery.js
+winject.js
+yolo.js
