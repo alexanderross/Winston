@@ -52,9 +52,9 @@ def process_host_pack
   host_file = File.open("#{bin_laden}/winston.html", "w+")
 
   files.each do |f|
-    host_file.write("\n<script type='text/javascript'>\n")
-    host_file.write(File.open(File.join([pack_path,f])).read())
-    host_file.write("\n</script>\n")
+    host_file.write("\n<script type='text/javascript' src='#{f}'></script>\n")
+    FileUtils.cp(File.join([pack_path,f]), "../bin/"+f.split("/").last)
+    #host_file.write("\n</script>\n")
   end
 
   Dir.entries(dirpath).each do |file|
@@ -83,8 +83,8 @@ def process_options_pack
   opt_content = File.open(opt_path, "r").read
   opt_file = File.open(opt_path, "w+")
   files.each do |f|
-    opt_file.write("\n<script type='text/javascript'>\n")
-    opt_file.write(File.open(File.join([pack_path,f])).read())
+    opt_file.write("\n<script type='text/javascript' src='#{f}'></script>\n")
+    FileUtils.cp(File.join([pack_path,f]), "../bin/"+f.split("/").last)
     opt_file.write("\n</script>\n")
   end
   opt_file.write(opt_content)
